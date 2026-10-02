@@ -1,0 +1,467 @@
+{
+  "book": {
+    "title": "Bayesian Adversarial Machine Learning",
+    "authors": [
+      {
+        "name": "Roi Naveiro",
+        "url": "https://roinaveiro.github.io/"
+      },
+      {
+        "name": "David Ríos Insua",
+        "url": "https://www.davidriosinsua.es/"
+      }
+    ],
+    "description": "A Bayesian perspective on learning and decision making under adversarial uncertainty. Explore the code, experiments and research behind each chapter.",
+    "organization": "bayesian-adversarial-ml",
+    "siteUrl": "https://bayesian-adversarial-ml.github.io",
+    "repositoryUrl": "https://github.com/bayesian-adversarial-ml/bayesian-adversarial-ml.github.io",
+    "coverImage": "",
+    "coverAlt": ""
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "summary": "Why machine learning systems fail under deliberate manipulation, and how attacks, defenses, and Bayesian reasoning fit into a practical approach to robustness.",
+      "topics": [
+        "Threat models",
+        "Attacks and defenses",
+        "Bayesian perspectives"
+      ],
+      "repositories": [
+        {
+          "name": "Chapter experiments",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        },
+        {
+          "name": "ACRA spam experiments",
+          "url": "https://github.com/roinaveiro/ACRA_spam_experiment",
+          "description": "Code accompanying the adversarial spam-classification paper discussed in this chapter.",
+          "relationship": "source-paper-experiments"
+        },
+        {
+          "name": "CleverHans",
+          "url": "https://github.com/cleverhans-lab/cleverhans",
+          "description": "Reference implementations of adversarial attacks for benchmarking machine learning models.",
+          "relationship": "related-software"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Adversarial Machine Learning: Bayesian Perspectives",
+          "authors": "David Ríos Insua, Roi Naveiro, Víctor Gallego and Jason Poulos",
+          "year": 2023,
+          "url": "https://doi.org/10.1080/01621459.2023.2183129",
+          "citationKey": "riosinsuaAdversarialMachineLearning2023"
+        },
+        {
+          "title": "Wild patterns: Ten years after the rise of adversarial machine learning",
+          "authors": "Battista Biggio and Fabio Roli",
+          "year": 2018,
+          "url": "https://doi.org/10.1016/j.patcog.2018.07.023",
+          "citationKey": "biggio2018wild"
+        },
+        {
+          "title": "Explaining and Harnessing Adversarial Examples",
+          "authors": "Ian Goodfellow, Jonathon Shlens and Christian Szegedy",
+          "year": 2015,
+          "url": "https://arxiv.org/abs/1412.6572",
+          "citationKey": "goodfellow2014explaining"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "AI Incident Database",
+          "url": "https://incidentdatabase.ai/",
+          "description": "Documented incidents that connect the chapter’s threat models to deployed AI systems."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 2,
+      "title": "Bayesian Machine Learning: core concepts",
+      "slug": "bayesian-machine-learning",
+      "summary": "The foundations used throughout the book: Bayesian inference, prediction and decision making, together with the computational methods that make them practical.",
+      "topics": [
+        "Bayesian inference",
+        "Decision theory",
+        "Computation"
+      ],
+      "repositories": [
+        {
+          "name": "Chapter notebooks",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        },
+        {
+          "name": "Introduction to Probabilistic Machine Learning",
+          "url": "https://github.com/davidriosinsua/IntoProbabilisticMachineLearning",
+          "description": "Source materials for David Ríos Insua’s introductory course, including examples in R.",
+          "relationship": "related-course"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Variational Inference: A Review for Statisticians",
+          "authors": "David M. Blei, Alp Kucukelbir and Jon D. McAuliffe",
+          "year": 2017,
+          "url": "https://doi.org/10.1080/01621459.2017.1285773",
+          "citationKey": "blei2017variational"
+        },
+        {
+          "title": "Bayesian Learning via Stochastic Gradient Langevin Dynamics",
+          "authors": "Max Welling and Yee Whye Teh",
+          "year": 2011,
+          "url": "https://icml.cc/2011/papers/398_icmlpaper.pdf",
+          "citationKey": "welling2011bayesian"
+        },
+        {
+          "title": "Bayesian Reinforcement Learning: A Survey",
+          "authors": "Mohammad Ghavamzadeh, Shie Mannor, Joelle Pineau and Aviv Tamar",
+          "year": 2015,
+          "url": "https://arxiv.org/abs/1609.04436",
+          "citationKey": "ghavamzadeh2015bayesian"
+        },
+        {
+          "title": "Adversarial Risk Analysis",
+          "authors": "David Ríos Insua, Jesús Ríos and David Banks",
+          "year": 2009,
+          "url": "https://doi.org/10.1198/jasa.2009.0155",
+          "citationKey": "riosinsuaAdversarialRiskAnalysis2009"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "Introduction to Probabilistic Machine Learning",
+          "url": "https://davidriosinsua.github.io/IntoProbabilisticMachineLearning/",
+          "description": "An introductory course with worked examples in R."
+        },
+        {
+          "name": "Probabilistic Machine Learning reading club",
+          "url": "https://pml-reading-club.github.io/resources.html",
+          "description": "Companion learning resources and software for probabilistic machine learning."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 3,
+      "title": "Adversarial classification",
+      "slug": "adversarial-classification",
+      "summary": "Classification provides a running example for understanding attacks, comparing defenses, and designing Bayesian protection during both training and operation.",
+      "topics": [
+        "Classification",
+        "Adversarial risk analysis",
+        "Training and operation"
+      ],
+      "repositories": [
+        {
+          "name": "Bayesian adversarial classification",
+          "url": "https://github.com/datalab-icmat/aml_bayes_classification",
+          "description": "Experiment scripts and notebooks for Bayesian protection during operation and training.",
+          "relationship": "chapter-experiments"
+        },
+        {
+          "name": "ACRA spam experiments",
+          "url": "https://github.com/roinaveiro/ACRA_spam_experiment",
+          "description": "Spam-classification experiments accompanying the adversarial risk analysis approach.",
+          "relationship": "source-paper-experiments"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Protecting Classifiers from Attacks",
+          "authors": "Víctor Gallego, Roi Naveiro, Alberto Redondo, David Ríos Insua and Fabrizio Ruggeri",
+          "year": 2024,
+          "url": "https://doi.org/10.1214/24-STS922",
+          "citationKey": "gallegoProtectingClassifiersAttacks2024"
+        },
+        {
+          "title": "Adversarial classification: An adversarial risk analysis approach",
+          "authors": "Roi Naveiro, Alberto Redondo, David Ríos Insua and Fabrizio Ruggeri",
+          "year": 2019,
+          "url": "https://doi.org/10.1016/j.ijar.2019.07.003",
+          "citationKey": "naveiro2019adversarial"
+        },
+        {
+          "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+          "authors": "Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras and Adrian Vladu",
+          "year": 2018,
+          "url": "https://arxiv.org/abs/1706.06083",
+          "citationKey": "madry2018towards"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "Training notebooks",
+          "url": "https://github.com/datalab-icmat/aml_bayes_classification/tree/main/training",
+          "description": "Neural-network training, attack evaluation, and experiment notebooks."
+        },
+        {
+          "name": "Protection during operation",
+          "url": "https://github.com/datalab-icmat/aml_bayes_classification/tree/main/operations",
+          "description": "Classifiers, attacks, approximate Bayesian computation, and evaluation scripts."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 4,
+      "title": "A unified Bayesian framework for adversarial robustness in supervised learning",
+      "slug": "bayesian-adversarial-robustness",
+      "summary": "A probabilistic account of adversarial manipulation connects attacks on predictive distributions with defenses for Bayesian classification and regression.",
+      "topics": [
+        "Adversarial channels",
+        "Predictive distributions",
+        "Bayesian robustness"
+      ],
+      "repositories": [
+        {
+          "name": "Evasion attacks on Bayesian models",
+          "url": "https://github.com/pablogarciarce/AdvReg",
+          "description": "Notebooks and source code for attacks on point predictions and full posterior predictive distributions.",
+          "relationship": "source-paper-experiments"
+        },
+        {
+          "name": "Bayesian defense experiments",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        }
+      ],
+      "papers": [
+        {
+          "title": "A unifying Bayesian framework for adversarial robustness",
+          "authors": "Pablo G. Arce, Roi Naveiro and David Ríos Insua",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.09288",
+          "citationKey": "arce2025unified"
+        },
+        {
+          "title": "Evasion Attacks Against Bayesian Predictive Models",
+          "authors": "Pablo G. Arce, Roi Naveiro and David Ríos Insua",
+          "year": 2025,
+          "url": "https://proceedings.mlr.press/v286/arce25a.html",
+          "citationKey": "pmlr-v286-arce25a"
+        },
+        {
+          "title": "A General Framework for Updating Belief Distributions",
+          "authors": "Pier Giovanni Bissiri, Chris C. Holmes and Stephen G. Walker",
+          "year": 2016,
+          "url": "https://arxiv.org/abs/1306.6430",
+          "citationKey": "bissiri2016general"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "Attack experiment notebooks",
+          "url": "https://github.com/pablogarciarce/AdvReg/tree/main/notebooks",
+          "description": "Experiments on toy models, tabular data, Bayesian neural networks, and MNIST."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 5,
+      "title": "Adversarial issues in unsupervised learning",
+      "slug": "unsupervised-learning",
+      "summary": "Attacks and defenses for models that learn without labels. Bayesian methods account for uncertainty in adversarial transformations, protect predictive distributions, and connect to emerging risks in generative models and language-model applications.",
+      "topics": [
+        "Unsupervised learning",
+        "Generative models",
+        "Input purification"
+      ],
+      "repositories": [
+        {
+          "name": "Chapter code",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Adversarial Robustness in Unsupervised Machine Learning: A Systematic Review",
+          "authors": "Mathias Lundteigen Mohus and Jinyue Li",
+          "year": 2023,
+          "url": "https://arxiv.org/abs/2306.00687",
+          "citationKey": "mohusAdversarialRobustnessUnsupervised2023"
+        },
+        {
+          "title": "Is Data Clustering in Adversarial Settings Secure?",
+          "authors": "Battista Biggio, Ignazio Pillai, Samuel Rota Bulò, Davide Ariu, Marcello Pelillo and Fabio Roli",
+          "year": 2013,
+          "url": "https://arxiv.org/abs/1811.09982",
+          "citationKey": "biggio2013data"
+        },
+        {
+          "title": "Automatic Posterior Transformation for Likelihood-Free Inference",
+          "authors": "David Greenberg, Marcel Nonnenmacher and Jakob Macke",
+          "year": 2019,
+          "url": "https://proceedings.mlr.press/v97/greenberg19a.html",
+          "citationKey": "greenberg2019automatic"
+        },
+        {
+          "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+          "authors": "Kai Greshake, Sahar Abdelnabi, Shailesh Mishra, Christoph Endres, Thorsten Holz and Mario Fritz",
+          "year": 2023,
+          "url": "https://arxiv.org/abs/2302.12173",
+          "citationKey": "greshake2023not"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "OWASP Top 10 for LLM Applications",
+          "url": "https://genai.owasp.org/llm-top-10/",
+          "description": "The 2025 risk taxonomy referenced in the chapter’s discussion of language-model security."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 6,
+      "title": "Adversarial issues in reinforcement learning",
+      "slug": "reinforcement-learning",
+      "summary": "How can an agent learn when an opponent can interfere with its observations, rewards or actions? Threatened Markov decision processes combine value learning with Bayesian opponent models, illustrated through the friend-or-foe environment.",
+      "topics": [
+        "Reinforcement learning",
+        "Opponent modeling",
+        "Threatened MDPs"
+      ],
+      "repositories": [
+        {
+          "name": "ARAMARL",
+          "url": "https://github.com/vicgalle/ARAMARL",
+          "description": "Experiment code for Opponent Aware Reinforcement Learning, including the friend-or-foe examples used in this chapter.",
+          "relationship": "direct-experiments"
+        },
+        {
+          "name": "AI Safety Gridworlds",
+          "url": "https://github.com/google-deepmind/ai-safety-gridworlds",
+          "description": "Original safety environments, including friend-or-foe. Archived upstream project; see ARAMARL for the chapter’s experiment code.",
+          "relationship": "related-software"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Opponent Aware Reinforcement Learning",
+          "authors": "Víctor Gallego, Roi Naveiro, David Ríos Insua and David Gómez-Ullate",
+          "year": 2026,
+          "url": "https://doi.org/10.1016/j.ejor.2026.08.031",
+          "citationKey": "gallego2019opponent"
+        },
+        {
+          "title": "AI Safety Gridworlds",
+          "authors": "Jan Leike, Miljan Martic, Victoria Krakovna, Pedro A. Ortega, Tom Everitt, Andrew Lefrancq, Laurent Orseau and Shane Legg",
+          "year": 2017,
+          "url": "https://arxiv.org/abs/1711.09883",
+          "citationKey": "leike2017ai"
+        },
+        {
+          "title": "Adversarial Attacks on Neural Network Policies",
+          "authors": "Sandy Huang, Nicolas Papernot, Ian Goodfellow, Yan Duan and Pieter Abbeel",
+          "year": 2017,
+          "url": "https://arxiv.org/abs/1702.02284",
+          "citationKey": "huang2017adversarial"
+        }
+      ],
+      "otherResources": [
+        {
+          "name": "Friend-or-foe notebook",
+          "url": "https://github.com/vicgalle/ARAMARL/blob/master/friend_or_foe.ipynb",
+          "description": "Notebook for the friend-or-foe experiments in the chapter’s source repository."
+        },
+        {
+          "name": "Friend-or-foe gridworld notebook",
+          "url": "https://github.com/vicgalle/ARAMARL/blob/master/friend_foe_gridworld.ipynb",
+          "description": "Spatial gridworld version of the friend-or-foe experiments."
+        },
+        {
+          "name": "Opponent Aware Reinforcement Learning — preprint",
+          "url": "https://arxiv.org/abs/1908.08773",
+          "description": "Open preprint of the chapter’s principal source paper."
+        }
+      ],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 7,
+      "title": "A Bayesian decision theoretic perspective on adversarial machine learning",
+      "slug": "decision-theory",
+      "summary": "Robustness is assessed through the quality of the decisions a model supports. Utility gaps connect adversarial risk analysis, minimax protection and least-favorable attack distributions, leading to a pipeline for computing, monitoring and revising defenses.",
+      "topics": [
+        "Decision theory",
+        "Minimax robustness",
+        "Adversarial risk analysis"
+      ],
+      "repositories": [
+        {
+          "name": "Chapter code",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        }
+      ],
+      "papers": [
+        {
+          "title": "Adversarial Risk Analysis",
+          "authors": "David Ríos Insua, Jesús Ríos and David Banks",
+          "year": 2009,
+          "url": "https://doi.org/10.1198/jasa.2009.0155",
+          "citationKey": "riosinsuaAdversarialRiskAnalysis2009"
+        },
+        {
+          "title": "On General Minimax Theorems",
+          "authors": "Maurice Sion",
+          "year": 1958,
+          "url": "https://msp.org/pjm/1958/8-1/pjm-v8-n1-p14-p.pdf",
+          "citationKey": "sion1958general"
+        },
+        {
+          "title": "Planning in the Presence of Cost Functions Controlled by an Adversary",
+          "authors": "H. Brendan McMahan, Geoffrey J. Gordon and Avrim Blum",
+          "year": 2003,
+          "url": "https://aaai.org/papers/icml03-071-planning-in-the-presence-of-cost-functions-controlled-by-an-adversary/",
+          "citationKey": "mcmahan2003planning"
+        }
+      ],
+      "otherResources": [],
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "number": 8,
+      "title": "Conclusions",
+      "slug": "conclusions",
+      "summary": "Closing perspectives and directions for Bayesian adversarial machine learning.",
+      "topics": [
+        "Research directions",
+        "Bayesian perspectives",
+        "Adversarial learning"
+      ],
+      "repositories": [
+        {
+          "name": "Chapter code",
+          "url": "",
+          "description": "",
+          "relationship": "chapter-experiments"
+        }
+      ],
+      "papers": [],
+      "otherResources": [],
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

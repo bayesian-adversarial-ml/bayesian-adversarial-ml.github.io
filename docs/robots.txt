@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bayesian-adversarial-ml.github.io/sitemap.xml

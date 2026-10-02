@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="640" viewBox="0 0 560 640" role="img" aria-labelledby="title desc">
+  <title id="title">An abstract study of uncertainty and adversarial perturbations</title>
+  <desc id="desc">Blue contours surround two nearby points, joined by a fine arrow. A sparse mathematical field suggests inference under a changing observation.</desc>
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#bdbbae"/></pattern>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6" fill="none" stroke="#244cbb" stroke-width="1"/></marker>
+  </defs>
+  <rect width="560" height="640" fill="#eeede5"/>
+  <rect x="32" y="32" width="496" height="576" fill="url(#dots)"/>
+  <g fill="none" stroke="#244cbb" stroke-width="1.4">
+    <path d="M91 417C20 301 119 159 269 163C420 167 478 249 441 359C410 450 197 558 91 417Z" opacity=".25"/>
+    <path d="M119 400C61 300 144 187 270 190C396 193 444 259 414 352C387 430 207 518 119 400Z" opacity=".38"/>
+    <path d="M148 382C101 300 168 214 272 216C374 218 411 270 386 345C362 409 217 478 148 382Z" opacity=".52"/>
+    <path d="M176 365C142 300 190 241 273 243C351 245 378 280 357 338C337 390 227 438 176 365Z" opacity=".67"/>
+    <path d="M205 347C183 302 215 267 274 269C329 271 345 290 329 331C313 367 237 399 205 347Z" opacity=".85"/>
+    <path d="M233 331C222 307 241 295 274 295C305 295 313 304 302 323C291 345 253 361 233 331Z"/>
+  </g>
+  <path d="M281 321 361 246" fill="none" stroke="#244cbb" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <circle cx="276" cy="326" r="6" fill="#244cbb"/>
+  <circle cx="367" cy="239" r="6" fill="#eeede5" stroke="#244cbb" stroke-width="1.5"/>
+  <g fill="#244cbb" font-family="Georgia, serif" font-style="italic" font-size="22"><text x="256" y="362">x</text><text x="381" y="239">x′</text></g>
+  <path d="M70 516H490M70 516V114" stroke="#999e9b" stroke-width=".7"/>
+  <g fill="#666f6a" font-family="Arial, sans-serif" font-size="9" letter-spacing="2"><text x="70" y="90">OBSERVATION / PERTURBATION</text><text x="70" y="549">UNCERTAINTY AS A STARTING POINT</text></g>
+  <path d="M470 76h20v20M70 576h20" fill="none" stroke="#244cbb" stroke-width="1.2"/>
+</svg>
