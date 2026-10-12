@@ -10,19 +10,19 @@ Edit `data/catalog.json`, then rebuild:
 python3 build.py
 ```
 
-The catalogue contains the book’s title, author links, description, and one object per chapter. Every chapter has a summary, topics, code repositories, papers, and optional further resources. A blank resource URL is not rendered as a link. An empty repository list leaves a subtle open entry on the chapter page; do not add guessed URLs.
+The catalogue contains the book’s title, author links, description, and one object per chapter. Every chapter has a summary, topics, code repositories, papers, and optional further resources. Resources without URLs and sections without linked resources are omitted from the published pages.
 
-Repository descriptions should say whether a repository contains the chapter’s implementation or is a related tool/example. Research-only `evidence` and `notes` fields, if present, are never displayed. The generated pages include no manuscript text beyond the short chapter descriptions in the catalogue, and no analytics or third-party scripts.
+Repository descriptions distinguish chapter implementations from related tools and examples. Paper links must lead to full text available without a subscription or sign-in, using open publisher pages or author/institutional preprints. Omit papers without a verified open version. The generated pages include no manuscript text beyond the short chapter descriptions in the catalogue, and no analytics or third-party scripts.
 
 Chapter routes use `slug`; avoid changing these after publication unless redirects are added. The build rewrites known pages but intentionally does not delete unrelated files in `docs/`. If a chapter slug is changed, remove its obsolete generated folder separately.
 
 ## Images and appearance
 
-The home illustration, `assets/cover-study.svg`, is an original, provisional mathematical study. It is not presented as an official book cover. To replace it, add a file inside `assets/` and set:
+The home illustration defaults to `assets/cover-study.svg`. To replace it, add a file inside `assets/` and set:
 
 ```json
-"coverImage": "assets/book-cover.jpg",
-"coverAlt": "Description of the official cover",
+"coverImage": "assets/home-illustration.jpg",
+"coverAlt": "Description of the illustration",
 "coverCaption": "Optional image credit"
 ```
 

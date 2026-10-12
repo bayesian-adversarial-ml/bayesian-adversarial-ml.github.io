@@ -122,11 +122,11 @@ def home():
     )
     artwork = BOOK.get("coverImage") or "assets/cover-study.svg"
     alt = BOOK.get("coverAlt") or "An abstract study of uncertainty: blue contours surround an observation and its perturbed counterpart."
-    caption = BOOK.get("coverCaption") or ("Provisional artwork · observation & uncertainty" if not BOOK.get("coverImage") else "")
+    caption = BOOK.get("coverCaption", "")
     rows = []
     for chapter in CHAPTERS:
         count = resource_count(chapter)
-        count_label = f"{count} resource{'s' if count != 1 else ''}" if count else "—"
+        count_label = f"{count} resource{'s' if count != 1 else ''}" if count else ""
         topics = " · ".join(chapter.get("topics", [])[:3])
         rows.append(f'''<a class="chapter-row" href="{chapter_path(chapter)}">
   <span class="chapter-number">{int(chapter['number']):02}</span>
@@ -148,7 +148,7 @@ def home():
   <div class="section-heading"><h2 id="chapters-heading">Inside the book</h2><span class="subtle">{len(CHAPTERS):02} chapters</span></div>
   <div class="chapter-list">{''.join(rows)}</div>
 </section>
-<section class="about-band" aria-labelledby="about-heading"><h2 id="about-heading">A guide to the resources</h2><div><p>Each chapter brings together its supporting code and selected research papers. Repository descriptions distinguish the chapter’s implementations from related tools and examples.</p><p>Where a code repository has not yet been identified, its entry is left open. Know of a missing resource? <a href="{e(BOOK['repositoryUrl'])}/issues">Suggest an addition</a>.</p></div></section>
+<section class="about-band" aria-labelledby="about-heading"><h2 id="about-heading">A guide to the resources</h2><div><p>Browse supporting code, selected research papers, and related tools by chapter. The descriptions distinguish chapter implementations from companion software and examples.</p><p><a href="{e(BOOK['repositoryUrl'])}/issues">Suggest a resource or correction</a>.</p></div></section>
 </main>''')
 
 
@@ -165,19 +165,10 @@ def chapter_page(chapter, index):
     topics = "".join(f"<li>{e(topic)}</li>" for topic in chapter.get("topics", []))
     sections = []
     for kind, heading in (("repositories", "Code & experiments"), ("papers", "Related papers"), ("otherResources", "Further resources")):
-        resources = chapter.get(kind, [])
-        if kind == "otherResources" and not resources:
+        resources = valid_resources(chapter, kind)
+        if not resources:
             continue
-        body = ""
-        for resource in resources:
-            if resource.get("url"):
-                body += resource_item(resource, paper=kind == "papers")
-            else:
-                name = resource.get("name") or resource.get("title", "Repository")
-                body += f'<div class="empty-slot"><span>{e(name)}</span><span class="dash" aria-label="Link not yet available">—</span></div>'
-        if not body:
-            text = "Repository to be added." if kind == "repositories" else "References to be added."
-            body = f'<div class="empty-slot"><span class="dash" aria-hidden="true">—</span><span>{text}</span></div>'
+        body = "".join(resource_item(resource, paper=kind == "papers") for resource in resources)
         sections.append(f'<section class="resource-section"><h2>{heading}</h2>{body}</section>')
     illustration = ""
     if chapter.get("image"):
@@ -193,9 +184,10 @@ def chapter_page(chapter, index):
             pagination.append(f'<a class="{css}" href="../{e(target["slug"])}/"><span>{label} · {int(target["number"]):02}</span><strong>{e(target["title"])}</strong></a>')
         else:
             pagination.append('<div aria-hidden="true"></div>')
+    browse_link = f'<a class="sidebar-link" href="../../resources/?chapter={chapter["number"]}">Browse these resources <span aria-hidden="true">↗</span></a>' if resource_count(chapter) else ""
     content = f'''<main id="main" class="container">
 <div class="page-heading"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span aria-hidden="true">/</span><a href="../../#chapters">Chapters</a></nav><p class="eyebrow">Chapter {int(chapter['number']):02}</p><h1>{e(chapter['title'])}</h1><p class="page-lead">{e(chapter['summary'])}</p></div>
-<div class="chapter-layout"><aside class="chapter-sidebar" aria-label="Chapter topics"><h2 class="eyebrow">In this chapter</h2><ul class="topic-list">{topics}</ul><a class="sidebar-link" href="../../resources/?chapter={chapter['number']}">Browse these resources <span aria-hidden="true">↗</span></a></aside><div class="chapter-content">{illustration}{''.join(sections)}</div></div>
+<div class="chapter-layout"><aside class="chapter-sidebar" aria-label="Chapter topics"><h2 class="eyebrow">In this chapter</h2><ul class="topic-list">{topics}</ul>{browse_link}</aside><div class="chapter-content">{illustration}{''.join(sections)}</div></div>
 <nav class="chapter-pagination" aria-label="Adjacent chapters">{''.join(pagination)}</nav>
 </main>'''
     return page(f"Chapter {chapter['number']}: {chapter['title']}", chapter["summary"], content, chapter_path(chapter), 2)
@@ -225,7 +217,7 @@ def resources_page():
 <div class="filter-bar"><div class="filter-buttons" role="group" aria-label="Resource type"><button class="filter-button" type="button" data-type-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-type-filter="code" aria-pressed="false">Code</button><button class="filter-button" type="button" data-type-filter="papers" aria-pressed="false">Papers</button></div><span class="result-count" data-result-count role="status" aria-live="polite">{len(rows)} resources</span></div>
 <noscript><p>All resources are listed below. Enable JavaScript to use search and filters.</p></noscript>
 <div class="resource-catalogue" id="resource-results">{''.join(rows)}<p class="empty-state" data-empty-state hidden>No resources match these filters. Try another term or select all chapters.</p></div>
-</section><p class="resource-note">A resource may appear under more than one chapter. Chapters without an identified repository retain an open code entry on their chapter page.</p>
+</section><p class="resource-note">Resources relevant to several chapters appear in each chapter’s list.</p>
 </main>'''
     return page("Resources", "Code repositories, reproducible experiments, and related papers for every chapter of Bayesian Adversarial Machine Learning.", content, "resources/", 1, "resources")
 

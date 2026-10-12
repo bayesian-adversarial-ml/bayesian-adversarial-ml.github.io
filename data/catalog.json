@@ -31,12 +31,6 @@
       ],
       "repositories": [
         {
-          "name": "Chapter experiments",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
-        },
-        {
           "name": "ACRA spam experiments",
           "url": "https://github.com/roinaveiro/ACRA_spam_experiment",
           "description": "Code accompanying the adversarial spam-classification paper discussed in this chapter.",
@@ -47,6 +41,24 @@
           "url": "https://github.com/cleverhans-lab/cleverhans",
           "description": "Reference implementations of adversarial attacks for benchmarking machine learning models.",
           "relationship": "related-software"
+        },
+        {
+          "name": "Current advances in neural networks (nn-review)",
+          "url": "https://github.com/vicgalle/nn-review",
+          "description": "Companion repository for the review “Current advances in neural networks”.",
+          "relationship": "related-repository"
+        },
+        {
+          "name": "Adversarial Robustness Toolbox (ART)",
+          "url": "https://adversarial-robustness-toolbox.readthedocs.io/en/latest/",
+          "description": "Tools for evaluating and defending machine learning models against adversarial threats.",
+          "relationship": "related-software"
+        },
+        {
+          "name": "RobustBench",
+          "url": "https://robustbench.github.io/",
+          "description": "Standardized adversarial robustness benchmarks, leaderboards and robust models.",
+          "relationship": "related-software"
         }
       ],
       "papers": [
@@ -54,14 +66,14 @@
           "title": "Adversarial Machine Learning: Bayesian Perspectives",
           "authors": "David Ríos Insua, Roi Naveiro, Víctor Gallego and Jason Poulos",
           "year": 2023,
-          "url": "https://doi.org/10.1080/01621459.2023.2183129",
+          "url": "https://arxiv.org/abs/2003.03546",
           "citationKey": "riosinsuaAdversarialMachineLearning2023"
         },
         {
           "title": "Wild patterns: Ten years after the rise of adversarial machine learning",
           "authors": "Battista Biggio and Fabio Roli",
           "year": 2018,
-          "url": "https://doi.org/10.1016/j.patcog.2018.07.023",
+          "url": "https://arxiv.org/abs/1712.03141",
           "citationKey": "biggio2018wild"
         },
         {
@@ -77,6 +89,21 @@
           "name": "AI Incident Database",
           "url": "https://incidentdatabase.ai/",
           "description": "Documented incidents that connect the chapter’s threat models to deployed AI systems."
+        },
+        {
+          "name": "ML Safety",
+          "url": "https://www.mlsafety.org/",
+          "description": "An introduction to machine learning safety, with courses and research resources."
+        },
+        {
+          "name": "Awesome Adversarial Machine Learning",
+          "url": "https://github.com/yenchenlin/awesome-adversarial-machine-learning",
+          "description": "A collection of adversarial machine learning papers, tutorials and software."
+        },
+        {
+          "name": "AI Safety for Mathematicians",
+          "url": "https://mathforaisafety.org/",
+          "description": "Mathematical perspectives on AI safety, with problems and research directions."
         }
       ],
       "image": "",
@@ -92,26 +119,13 @@
         "Decision theory",
         "Computation"
       ],
-      "repositories": [
-        {
-          "name": "Chapter notebooks",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
-        },
-        {
-          "name": "Introduction to Probabilistic Machine Learning",
-          "url": "https://github.com/davidriosinsua/IntoProbabilisticMachineLearning",
-          "description": "Source materials for David Ríos Insua’s introductory course, including examples in R.",
-          "relationship": "related-course"
-        }
-      ],
+      "repositories": [],
       "papers": [
         {
           "title": "Variational Inference: A Review for Statisticians",
           "authors": "David M. Blei, Alp Kucukelbir and Jon D. McAuliffe",
           "year": 2017,
-          "url": "https://doi.org/10.1080/01621459.2017.1285773",
+          "url": "https://arxiv.org/abs/1601.00670",
           "citationKey": "blei2017variational"
         },
         {
@@ -127,13 +141,6 @@
           "year": 2015,
           "url": "https://arxiv.org/abs/1609.04436",
           "citationKey": "ghavamzadeh2015bayesian"
-        },
-        {
-          "title": "Adversarial Risk Analysis",
-          "authors": "David Ríos Insua, Jesús Ríos and David Banks",
-          "year": 2009,
-          "url": "https://doi.org/10.1198/jasa.2009.0155",
-          "citationKey": "riosinsuaAdversarialRiskAnalysis2009"
         }
       ],
       "otherResources": [
@@ -180,14 +187,14 @@
           "title": "Protecting Classifiers from Attacks",
           "authors": "Víctor Gallego, Roi Naveiro, Alberto Redondo, David Ríos Insua and Fabrizio Ruggeri",
           "year": 2024,
-          "url": "https://doi.org/10.1214/24-STS922",
+          "url": "https://arxiv.org/abs/2004.08705",
           "citationKey": "gallegoProtectingClassifiersAttacks2024"
         },
         {
           "title": "Adversarial classification: An adversarial risk analysis approach",
           "authors": "Roi Naveiro, Alberto Redondo, David Ríos Insua and Fabrizio Ruggeri",
           "year": 2019,
-          "url": "https://doi.org/10.1016/j.ijar.2019.07.003",
+          "url": "https://arxiv.org/abs/1802.07513",
           "citationKey": "naveiro2019adversarial"
         },
         {
@@ -229,12 +236,6 @@
           "url": "https://github.com/pablogarciarce/AdvReg",
           "description": "Notebooks and source code for attacks on point predictions and full posterior predictive distributions.",
           "relationship": "source-paper-experiments"
-        },
-        {
-          "name": "Bayesian defense experiments",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
         }
       ],
       "papers": [
@@ -280,14 +281,7 @@
         "Generative models",
         "Input purification"
       ],
-      "repositories": [
-        {
-          "name": "Chapter code",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
-        }
-      ],
+      "repositories": [],
       "papers": [
         {
           "title": "Adversarial Robustness in Unsupervised Machine Learning: A Systematic Review",
@@ -357,7 +351,7 @@
           "title": "Opponent Aware Reinforcement Learning",
           "authors": "Víctor Gallego, Roi Naveiro, David Ríos Insua and David Gómez-Ullate",
           "year": 2026,
-          "url": "https://doi.org/10.1016/j.ejor.2026.08.031",
+          "url": "https://arxiv.org/abs/1908.08773",
           "citationKey": "gallego2019opponent"
         },
         {
@@ -385,11 +379,6 @@
           "name": "Friend-or-foe gridworld notebook",
           "url": "https://github.com/vicgalle/ARAMARL/blob/master/friend_foe_gridworld.ipynb",
           "description": "Spatial gridworld version of the friend-or-foe experiments."
-        },
-        {
-          "name": "Opponent Aware Reinforcement Learning — preprint",
-          "url": "https://arxiv.org/abs/1908.08773",
-          "description": "Open preprint of the chapter’s principal source paper."
         }
       ],
       "image": "",
@@ -405,22 +394,8 @@
         "Minimax robustness",
         "Adversarial risk analysis"
       ],
-      "repositories": [
-        {
-          "name": "Chapter code",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
-        }
-      ],
+      "repositories": [],
       "papers": [
-        {
-          "title": "Adversarial Risk Analysis",
-          "authors": "David Ríos Insua, Jesús Ríos and David Banks",
-          "year": 2009,
-          "url": "https://doi.org/10.1198/jasa.2009.0155",
-          "citationKey": "riosinsuaAdversarialRiskAnalysis2009"
-        },
         {
           "title": "On General Minimax Theorems",
           "authors": "Maurice Sion",
@@ -450,14 +425,7 @@
         "Bayesian perspectives",
         "Adversarial learning"
       ],
-      "repositories": [
-        {
-          "name": "Chapter code",
-          "url": "",
-          "description": "",
-          "relationship": "chapter-experiments"
-        }
-      ],
+      "repositories": [],
       "papers": [],
       "otherResources": [],
       "image": "",
