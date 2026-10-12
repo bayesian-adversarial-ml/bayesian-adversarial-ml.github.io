@@ -15,8 +15,8 @@
     "organization": "bayesian-adversarial-ml",
     "siteUrl": "https://bayesian-adversarial-ml.github.io",
     "repositoryUrl": "https://github.com/bayesian-adversarial-ml/bayesian-adversarial-ml.github.io",
-    "coverImage": "assets/competing-agents.webp",
-    "coverAlt": "Two opposing AI agents formed from blue and copper neural networks face each other above a shared probability landscape, with subtle star and circuit motifs.",
+    "coverImage": "assets/competing-agents-mediated.webp",
+    "coverAlt": "Two opposing AI robots with subtle U.S. and Chinese flag inlays, joined across a probability landscape by a small European star-circle bridge suggesting mediation.",
     "coverWidth": 1173,
     "coverHeight": 1341
   },
