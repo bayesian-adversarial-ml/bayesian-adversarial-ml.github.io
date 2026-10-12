@@ -23,8 +23,12 @@ The home illustration defaults to `assets/cover-study.svg`. To replace it, add a
 ```json
 "coverImage": "assets/home-illustration.jpg",
 "coverAlt": "Description of the illustration",
+"coverWidth": 1173,
+"coverHeight": 1341,
 "coverCaption": "Optional image credit"
 ```
+
+Set `coverWidth` and `coverHeight` to the image’s actual pixel dimensions.
 
 Each chapter also accepts `image`, `imageAlt`, and optional `imageCaption` fields. Leave `image` blank to omit the image; fill it with an `assets/…` path or a public HTTPS URL when ready. Supply meaningful alternative text and any required credit. Put all local images in `assets/` so the build copies them into the published directory.
 

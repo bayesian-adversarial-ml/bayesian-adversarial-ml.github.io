@@ -123,6 +123,8 @@ def home():
     artwork = BOOK.get("coverImage") or "assets/cover-study.svg"
     alt = BOOK.get("coverAlt") or "An abstract study of uncertainty: blue contours surround an observation and its perturbed counterpart."
     caption = BOOK.get("coverCaption", "")
+    artwork_width = int(BOOK.get("coverWidth", 560))
+    artwork_height = int(BOOK.get("coverHeight", 640))
     rows = []
     for chapter in CHAPTERS:
         count = resource_count(chapter)
@@ -141,7 +143,7 @@ def home():
     <p class="hero-description">{e(BOOK['description'])}</p>
     <div class="hero-actions"><a class="button" href="#chapters">Explore the chapters <span aria-hidden="true">↓</span></a><a class="text-link" href="resources/">Find code &amp; papers <span aria-hidden="true">↗</span></a></div>
   </div>
-  <figure class="hero-art"><img src="{e(artwork)}" width="560" height="640" alt="{e(alt)}">{f'<figcaption>{e(caption)}</figcaption>' if caption else ''}</figure>
+  <figure class="hero-art"><img src="{e(artwork)}" width="{artwork_width}" height="{artwork_height}" alt="{e(alt)}" fetchpriority="high" decoding="async">{f'<figcaption>{e(caption)}</figcaption>' if caption else ''}</figure>
 </section>
 <section class="intro-band" aria-labelledby="reading-heading"><h2 id="reading-heading" class="eyebrow">From the book to the work</h2><p>Explore the ideas chapter by chapter, then follow them into the papers, implementations, and experiments that support them.</p></section>
 <section class="chapters-section" id="chapters" aria-labelledby="chapters-heading">
