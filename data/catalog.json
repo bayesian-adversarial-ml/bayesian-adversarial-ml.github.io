@@ -182,6 +182,12 @@
           "url": "https://github.com/roinaveiro/ACRA_spam_experiment",
           "description": "Spam-classification experiments accompanying the adversarial risk analysis approach.",
           "relationship": "source-paper-experiments"
+        },
+        {
+          "name": "Adversarial Robustness Toolbox (ART)",
+          "url": "https://adversarial-robustness-toolbox.readthedocs.io/en/latest/",
+          "description": "Tools for evaluating and defending machine learning models against adversarial threats.",
+          "relationship": "related-software"
         }
       ],
       "papers": [
