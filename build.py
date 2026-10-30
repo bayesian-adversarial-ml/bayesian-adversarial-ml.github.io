@@ -141,16 +141,15 @@ def home():
     <h1 id="book-title">Bayesian<br><em>Adversarial</em><br>Machine Learning</h1>
     <p class="authors">{authors}</p>
     <p class="hero-description">{e(BOOK['description'])}</p>
-    <div class="hero-actions"><a class="button" href="#chapters">Explore the chapters <span aria-hidden="true">↓</span></a><a class="text-link" href="resources/">Find code &amp; papers <span aria-hidden="true">↗</span></a></div>
+    <div class="hero-actions"><a class="button" href="#chapters">Chapters <span aria-hidden="true">↓</span></a><a class="text-link" href="resources/">Code &amp; papers <span aria-hidden="true">↗</span></a></div>
   </div>
   <figure class="hero-art"><img src="{e(artwork)}" width="{artwork_width}" height="{artwork_height}" alt="{e(alt)}" fetchpriority="high" decoding="async">{f'<figcaption>{e(caption)}</figcaption>' if caption else ''}</figure>
 </section>
-<section class="intro-band" aria-labelledby="reading-heading"><h2 id="reading-heading" class="eyebrow">From the book to the work</h2><p>Explore the ideas chapter by chapter, then follow them into the papers, implementations, and experiments that support them.</p></section>
 <section class="chapters-section" id="chapters" aria-labelledby="chapters-heading">
-  <div class="section-heading"><h2 id="chapters-heading">Inside the book</h2><span class="subtle">{len(CHAPTERS):02} chapters</span></div>
+  <div class="section-heading"><h2 id="chapters-heading">Chapters</h2><span class="subtle">{len(CHAPTERS):02} chapters</span></div>
   <div class="chapter-list">{''.join(rows)}</div>
 </section>
-<section class="about-band" aria-labelledby="about-heading"><h2 id="about-heading">A guide to the resources</h2><div><p>Browse supporting code, selected research papers, and related tools by chapter. The descriptions distinguish chapter implementations from companion software and examples.</p><p><a href="{e(BOOK['repositoryUrl'])}/issues">Suggest a resource or correction</a>.</p></div></section>
+<section class="about-band" aria-labelledby="about-heading"><h2 id="about-heading">About the resources</h2><div><p>The lists include code for chapter examples and experiments, related software, and papers.</p><p><a href="{e(BOOK['repositoryUrl'])}/issues">Suggest a resource or correction</a>.</p></div></section>
 </main>''')
 
 
@@ -213,9 +212,9 @@ def resources_page():
   <span class="row-arrow" aria-hidden="true">↗</span>
 </article>''')
     content = f'''<main id="main" class="container">
-<div class="page-heading"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><span>Resources</span></nav><p class="eyebrow">The companion library</p><h1>Code &amp; further reading</h1><p class="page-lead">Find the repositories, experiments, and papers behind each chapter. Search by title, author, or topic, or start with a chapter.</p></div>
+<div class="page-heading"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><span>Resources</span></nav><h1>Code &amp; further reading</h1><p class="page-lead">Code, papers, and other resources organized by chapter. Search by title, author, or topic.</p></div>
 <section aria-label="Resource catalogue">
-<div class="resource-controls"><label><span class="control-label">Search the resources</span><input class="search-input" type="search" placeholder="Try “classification” or an author’s name" data-resource-search aria-controls="resource-results"></label><label><span class="control-label">Chapter</span><select class="chapter-select" data-chapter-filter aria-controls="resource-results">{options}</select></label></div>
+<div class="resource-controls"><label><span class="control-label">Search the resources</span><input class="search-input" type="search" placeholder="Title, author, or topic" data-resource-search aria-controls="resource-results"></label><label><span class="control-label">Chapter</span><select class="chapter-select" data-chapter-filter aria-controls="resource-results">{options}</select></label></div>
 <div class="filter-bar"><div class="filter-buttons" role="group" aria-label="Resource type"><button class="filter-button" type="button" data-type-filter="all" aria-pressed="true">All</button><button class="filter-button" type="button" data-type-filter="code" aria-pressed="false">Code</button><button class="filter-button" type="button" data-type-filter="papers" aria-pressed="false">Papers</button></div><span class="result-count" data-result-count role="status" aria-live="polite">{len(rows)} resources</span></div>
 <noscript><p>All resources are listed below. Enable JavaScript to use search and filters.</p></noscript>
 <div class="resource-catalogue" id="resource-results">{''.join(rows)}<p class="empty-state" data-empty-state hidden>No resources match these filters. Try another term or select all chapters.</p></div>
@@ -257,7 +256,7 @@ def build():
     for index, chapter in enumerate(CHAPTERS):
         write(chapter_path(chapter) + "index.html", chapter_page(chapter, index))
     write("resources/index.html", resources_page())
-    not_found = f'<main id="main" class="container not-found"><p class="eyebrow">404 · Page not found</p><h1>A different starting point.</h1><p>This page may have moved. The chapter index is a good place to continue.</p><a class="button" href="{e(BOOK["siteUrl"])}#chapters">Go to the chapters <span aria-hidden="true">↗</span></a></main>'
+    not_found = f'<main id="main" class="container not-found"><p class="eyebrow">404</p><h1>Page not found</h1><p>This page may have moved or the link may be incorrect.</p><a class="button" href="{e(BOOK["siteUrl"])}#chapters">Chapters <span aria-hidden="true">↗</span></a></main>'
     # GitHub serves this document at arbitrary paths, so its assets and navigation use absolute URLs.
     error = page("Page not found", "Return to the book’s chapters and supporting resources.", not_found, "404.html")
     error = error.replace('href="./', f'href="{e(BOOK["siteUrl"].rstrip("/"))}/').replace('src="./', f'src="{e(BOOK["siteUrl"].rstrip("/"))}/')
