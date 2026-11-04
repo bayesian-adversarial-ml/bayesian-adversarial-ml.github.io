@@ -45,8 +45,21 @@ def author_string(authors):
     return str(authors or "")
 
 
-def external_link(url, label, css=""):
-    return f'<a href="{e(checked_url(url))}"{f" class={chr(34)}{css}{chr(34)}" if css else ""}>{label}<span class="external-arrow" aria-hidden="true">↗</span></a>'
+def external_link(url, label, css="", tracking=None):
+    attributes = f' class="{e(css)}"' if css else ""
+    if tracking and BOOK.get("goatCounterEndpoint"):
+        attributes += "".join(f' data-goatcounter-{key}="{e(value)}"' for key, value in tracking.items())
+    return f'<a href="{e(checked_url(url))}"{attributes}>{label}<span class="external-arrow" aria-hidden="true">↗</span></a>'
+
+
+def resource_link(resource, chapter, source_path, paper=False):
+    title = resource["title"] if paper else resource["name"]
+    tracking = {
+        "click": f"resource/chapter-{int(chapter['number'])}/{resource['url']}",
+        "title": f"Chapter {int(chapter['number'])}: {title}",
+        "referrer": BOOK["siteUrl"].rstrip("/") + "/" + source_path,
+    }
+    return external_link(resource["url"], e(title), tracking=tracking)
 
 
 def paper_details(paper):
@@ -88,6 +101,9 @@ def page(title, description, content, path="", depth=0, active=""):
     base = "../" * depth or "./"
     full_title = BOOK["title"] if not title else f"{title} — {BOOK['title']}"
     canonical = BOOK["siteUrl"].rstrip("/") + "/" + path
+    analytics = ""
+    if BOOK.get("goatCounterEndpoint"):
+        analytics = f'\n  <script data-goatcounter="{e(BOOK["goatCounterEndpoint"])}" async src="https://gc.zgo.at/count.js"></script>'
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -109,7 +125,7 @@ def page(title, description, content, path="", depth=0, active=""):
 <body>
 {header(base, active)}
 {content}
-{footer(base)}
+{footer(base)}{analytics}
 </body>
 </html>
 '''
@@ -153,13 +169,12 @@ def home():
 </main>''')
 
 
-def resource_item(resource, paper=False):
-    title = resource["title"] if paper else resource["name"]
+def resource_item(resource, chapter, paper=False):
     meta = f'<p class="resource-meta">{paper_details(resource)}</p>' if paper else ""
     description = resource.get("description", "")
     relationship = relationship_label(resource) if not paper else ""
     detail = " · ".join(item for item in (relationship, source_host(resource['url'])) if item)
-    return f'''<article class="resource-item"><h3>{external_link(resource['url'], e(title))}</h3>{meta}{f'<p>{e(description)}</p>' if description else ''}<span class="resource-host">{e(detail)}</span></article>'''
+    return f'''<article class="resource-item"><h3>{resource_link(resource, chapter, chapter_path(chapter), paper)}</h3>{meta}{f'<p>{e(description)}</p>' if description else ''}<span class="resource-host">{e(detail)}</span></article>'''
 
 
 def chapter_page(chapter, index):
@@ -169,7 +184,7 @@ def chapter_page(chapter, index):
         resources = valid_resources(chapter, kind)
         if not resources:
             continue
-        body = "".join(resource_item(resource, paper=kind == "papers") for resource in resources)
+        body = "".join(resource_item(resource, chapter, paper=kind == "papers") for resource in resources)
         sections.append(f'<section class="resource-section"><h2>{heading}</h2>{body}</section>')
     illustration = ""
     if chapter.get("image"):
@@ -202,13 +217,12 @@ def resources_page():
     for chapter in CHAPTERS:
         for kind, label, type_key in (("repositories", "Code", "code"), ("papers", "Paper", "papers"), ("otherResources", "Resource", "other")):
             for resource in valid_resources(chapter, kind):
-                title = resource["title"] if kind == "papers" else resource["name"]
                 details = paper_details(resource) if kind == "papers" else e(resource.get("description", ""))
                 relationship = relationship_label(resource) if kind == "repositories" else ""
                 label_detail = f'<p class="resource-meta">{e(relationship)}</p>' if relationship else ""
                 rows.append(f'''<article class="catalogue-row" data-resource data-type="{type_key}" data-chapter="{chapter['number']}">
   <div class="catalogue-tag">{label}<a href="../{chapter_path(chapter)}"><span>Chapter {int(chapter['number']):02}</span></a></div>
-  <div><h2>{external_link(resource['url'], e(title))}</h2>{f'<p>{details}</p>' if details else ''}{label_detail}<p class="resource-meta">{e(chapter['title'])}</p></div>
+  <div><h2>{resource_link(resource, chapter, 'resources/', paper=kind == 'papers')}</h2>{f'<p>{details}</p>' if details else ''}{label_detail}<p class="resource-meta">{e(chapter['title'])}</p></div>
   <span class="row-arrow" aria-hidden="true">↗</span>
 </article>''')
     content = f'''<main id="main" class="container">
@@ -240,6 +254,12 @@ def validate():
                 checked_url(resource.get("url", ""))
     checked_url(BOOK["siteUrl"])
     checked_url(BOOK["repositoryUrl"])
+    if BOOK.get("goatCounterEndpoint"):
+        endpoint = urlsplit(BOOK["goatCounterEndpoint"])
+        if (endpoint.scheme != "https" or not endpoint.netloc.endswith(".goatcounter.com")
+                or endpoint.path != "/count" or endpoint.query or endpoint.fragment
+                or endpoint.username or endpoint.password):
+            raise ValueError("Expected an HTTPS GoatCounter endpoint ending in /count")
 
 
 def write(relative_path, content):

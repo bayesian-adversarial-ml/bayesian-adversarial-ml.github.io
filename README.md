@@ -12,7 +12,15 @@ python3 build.py
 
 The catalogue contains the book’s title, author links, description, and one object per chapter. Every chapter has a summary, topics, code repositories, papers, and optional further resources. Resources without URLs and sections without linked resources are omitted from the published pages.
 
-Repository descriptions distinguish chapter implementations from related tools and examples. Paper links must lead to full text available without a subscription or sign-in, using open publisher pages or author/institutional preprints. Omit papers without a verified open version. The generated pages include no manuscript text beyond the short chapter descriptions in the catalogue, and no analytics or third-party scripts.
+Repository descriptions distinguish chapter implementations from related tools and examples. Paper links must lead to full text available without a subscription or sign-in, using open publisher pages or author/institutional preprints. Omit papers without a verified open version. The generated pages include no manuscript text beyond the short chapter descriptions in the catalogue.
+
+## Analytics
+
+[GoatCounter](https://roinaveiro.goatcounter.com/) records page visits and clicks on chapter resources, with location and referral statistics. Sign in to that dashboard to view the reports. The public collection endpoint is configured by `book.goatCounterEndpoint` in `data/catalog.json`; it is not an API key or password.
+
+Every page loads GoatCounter's asynchronous script. Each resource link sends an event named `resource/chapter-N/URL`, titled `Chapter N: Resource title`. The same resource in a chapter and in the searchable catalogue shares an event name; its referrer records which of those pages the click came from. Ordinary pageviews record the visitor's incoming referral source. Header, footer, and author links are not counted as resource events.
+
+GoatCounter reports aggregate audience information, not visitors' names or email addresses. It does not count local previews by default, and browser blockers can prevent collection. To disable analytics, remove `book.goatCounterEndpoint` and rebuild. See GoatCounter's [event documentation](https://www.goatcounter.com/help/events) and [instructions for excluding your own visits](https://www.goatcounter.com/help/skip-own).
 
 Chapter routes use `slug`; avoid changing these after publication unless redirects are added. The build rewrites known pages but intentionally does not delete unrelated files in `docs/`. If a chapter slug is changed, remove its obsolete generated folder separately.
 

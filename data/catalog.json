@@ -14,6 +14,7 @@
     "description": "A Bayesian perspective on learning and decision making under adversarial uncertainty.",
     "organization": "bayesian-adversarial-ml",
     "siteUrl": "https://bayesian-adversarial-ml.github.io",
+    "goatCounterEndpoint": "https://roinaveiro.goatcounter.com/count",
     "repositoryUrl": "https://github.com/bayesian-adversarial-ml/bayesian-adversarial-ml.github.io",
     "coverImage": "assets/competing-agents-transparent.webp",
     "coverAlt": "Two opposing AI robots with stars woven into their circuitry, facing one another across a probability landscape joined by a delicate orbit of golden stars.",
