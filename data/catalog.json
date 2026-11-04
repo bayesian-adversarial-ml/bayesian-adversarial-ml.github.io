@@ -435,7 +435,28 @@
       ],
       "repositories": [],
       "papers": [],
-      "otherResources": [],
+      "otherResources": [
+        {
+          "name": "The hidden risks of AI — Episode 1",
+          "url": "https://www.youtube.com/watch?v=r5YYGgA7joU",
+          "description": "First episode of the AXA Research Fund’s MasterScience video series on AI risks."
+        },
+        {
+          "name": "How AI is threatening politics, economy and society — Episode 2",
+          "url": "https://www.youtube.com/watch?v=DfOBYXsXEUI",
+          "description": "Second episode of the AXA Research Fund’s MasterScience video series on AI risks."
+        },
+        {
+          "name": "The road to safer AI — Episode 3",
+          "url": "https://www.youtube.com/watch?v=OlwFjXLaaCI",
+          "description": "Third episode of the AXA Research Fund’s MasterScience video series on AI risks."
+        },
+        {
+          "name": "AI poses risks to national security, elections and healthcare. Here’s how to reduce them",
+          "url": "https://theconversation.com/ai-poses-risks-to-national-security-elections-and-healthcare-heres-how-to-reduce-them-263826",
+          "description": "Article in The Conversation on AI risks and ways to reduce them."
+        }
+      ],
       "image": "",
       "imageAlt": ""
     }
