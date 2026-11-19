@@ -15,14 +15,11 @@
   text-decoration: underline;
 }
 #analytics-consent {
-  position: fixed;
-  z-index: 5;
-  inset: auto 16px 16px auto;
   max-width: min(28rem, calc(100% - 32px));
+  margin: 0 auto 24px;
   padding: 16px 20px;
   border: 1px solid var(--line);
   background: var(--paper);
-  box-shadow: 0 4px 20px #252e2b22;
   font-size: 14px;
 }
 #analytics-consent p { margin: 0 0 12px; }

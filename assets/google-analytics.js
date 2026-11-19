@@ -21,7 +21,6 @@
   function applyChoice(choice) {
     const allowed = choice === 'granted';
     window[disableFlag] = !allowed;
-    panel.hidden = Boolean(choice);
     if (!allowed) {
       if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
       for (const name of ['_ga', '_ga_' + measurementId.slice(2)]) {
@@ -57,10 +56,16 @@
     document.head.append(tag);
   }
 
+  function showPreferences(open) {
+    panel.hidden = !open;
+    settings.setAttribute('aria-expanded', String(open));
+  }
+
+  showPreferences(false);
   settings.hidden = false;
   settings.addEventListener('click', () => {
-    panel.hidden = false;
-    panel.querySelector('button').focus();
+    showPreferences(panel.hidden);
+    if (!panel.hidden) panel.querySelector('button').focus();
   });
   panel.addEventListener('click', event => {
     const button = event.target.closest('button[data-choice]');
@@ -68,6 +73,7 @@
     const choice = button.dataset.choice;
     document.cookie = preference + '=' + choice + '; Max-Age=15552000; Path=/; SameSite=Lax; Secure';
     applyChoice(choice);
+    showPreferences(false);
     settings.focus({ preventScroll: true });
   });
 

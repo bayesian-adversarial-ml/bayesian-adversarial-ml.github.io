@@ -18,7 +18,7 @@ Repository descriptions distinguish chapter implementations from related tools a
 
 ### Google Analytics 4
 
-Set `book.googleAnalyticsMeasurementId` in `data/catalog.json` to the public `G-` ID from the book’s web stream and run `python3 build.py`. An empty ID disables GA4. On the published site, the Google tag loads after the reader allows analytics cookies. The footer’s **Analytics preferences** button lets readers change their choice. Local previews skip the tag.
+Set `book.googleAnalyticsMeasurementId` in `data/catalog.json` to the public `G-` ID from the book’s web stream and run `python3 build.py`. An empty ID disables GA4. Readers can opt in to Google Analytics or withdraw consent by opening **Analytics preferences** in the footer. The Google tag loads only for readers who have opted in. Local previews skip the tag.
 
 Each chapter page sets the built-in **Content group** to `Chapter N`. On both the chapter page and the resource catalogue, opening a listed resource sends a `resource_click` event with the resource’s chapter and destination URL. The GA4 **Page path** identifies where the click happened. When Enhanced measurement is enabled, GA4 can also record a generic outbound `click`. Filter to `resource_click` when counting book resources.
 
