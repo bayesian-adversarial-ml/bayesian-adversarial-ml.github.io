@@ -16,11 +16,21 @@ Repository descriptions distinguish chapter implementations from related tools a
 
 ## Analytics
 
+### Google Analytics 4
+
+Set `book.googleAnalyticsMeasurementId` in `data/catalog.json` to the public `G-` ID from the book’s web stream and run `python3 build.py`. An empty ID disables GA4. On the published site, the Google tag loads after the reader allows analytics cookies. The footer’s **Analytics preferences** button lets readers change their choice. Local previews skip the tag.
+
+Each chapter page sets the built-in **Content group** to `Chapter N`. On both the chapter page and the resource catalogue, opening a listed resource sends a `resource_click` event with the resource’s chapter and destination URL. The GA4 **Page path** identifies where the click happened. When Enhanced measurement is enabled, GA4 can also record a generic outbound `click`. Filter to `resource_click` when counting book resources.
+
+For the reader map, connect the GA4 property to [Google Data Studio](https://docs.cloud.google.com/data-studio/connect-to-google-analytics). Add a **Geo chart** with **Country**, **Views** and the **World** zoom area. Add a **Date range control** and a **Content group** dropdown. For resource clicks, add a table with **Content group**, **Link URL** and **Event count**, filtered to **Event name = resource_click**. A reader who declines analytics is excluded from these Google reports.
+
+### GoatCounter
+
 [GoatCounter](https://roinaveiro.goatcounter.com/) records page visits and clicks on chapter resources, with location and referral statistics. Sign in to that dashboard to view the reports. The public collection endpoint is configured by `book.goatCounterEndpoint` in `data/catalog.json`; it is not an API key or password.
 
 Every page loads GoatCounter's asynchronous script. Each resource link sends an event named `resource/chapter-N/URL`, titled `Chapter N: Resource title`. The same resource in a chapter and in the searchable catalogue shares an event name; its referrer records which of those pages the click came from. Ordinary pageviews record the visitor's incoming referral source. Header, footer, and author links are not counted as resource events.
 
-GoatCounter reports aggregate audience information, not visitors' names or email addresses. It does not count local previews by default, and browser blockers can prevent collection. To disable analytics, remove `book.goatCounterEndpoint` and rebuild. See GoatCounter's [event documentation](https://www.goatcounter.com/help/events) and [instructions for excluding your own visits](https://www.goatcounter.com/help/skip-own).
+GoatCounter reports aggregate audience information, not visitors' names or email addresses. It does not count local previews by default, and browser blockers can prevent collection. To disable GoatCounter, remove `book.goatCounterEndpoint` and rebuild. See GoatCounter's [event documentation](https://www.goatcounter.com/help/events) and [instructions for excluding your own visits](https://www.goatcounter.com/help/skip-own).
 
 Chapter routes use `slug`; avoid changing these after publication unless redirects are added. The build rewrites known pages but intentionally does not delete unrelated files in `docs/`. If a chapter slug is changed, remove its obsolete generated folder separately.
 

@@ -45,8 +45,10 @@ def author_string(authors):
     return str(authors or "")
 
 
-def external_link(url, label, css="", tracking=None):
+def external_link(url, label, css="", tracking=None, resource_chapter=None):
     attributes = f' class="{e(css)}"' if css else ""
+    if resource_chapter and BOOK.get("googleAnalyticsMeasurementId"):
+        attributes += f' data-resource-chapter="{int(resource_chapter)}"'
     if tracking and BOOK.get("goatCounterEndpoint"):
         attributes += "".join(f' data-goatcounter-{key}="{e(value)}"' for key, value in tracking.items())
     return f'<a href="{e(checked_url(url))}"{attributes}>{label}<span class="external-arrow" aria-hidden="true">↗</span></a>'
@@ -59,7 +61,7 @@ def resource_link(resource, chapter, source_path, paper=False):
         "title": f"Chapter {int(chapter['number'])}: {title}",
         "referrer": BOOK["siteUrl"].rstrip("/") + "/" + source_path,
     }
-    return external_link(resource["url"], e(title), tracking=tracking)
+    return external_link(resource["url"], e(title), tracking=tracking, resource_chapter=chapter["number"])
 
 
 def paper_details(paper):
@@ -91,19 +93,30 @@ def header(base, active=""):
 
 
 def footer(base):
+    settings = ('<button type="button" class="analytics-settings" aria-controls="analytics-consent" hidden>'
+                'Analytics preferences</button>') if BOOK.get("googleAnalyticsMeasurementId") else ""
     return f'''<footer class="site-footer container">
   <div><span class="footer-title">{e(BOOK['title'])}</span>A companion to the book by Roi Naveiro and David Ríos Insua.</div>
-  <nav class="footer-links" aria-label="Footer navigation"><a href="{base}#chapters">Chapters</a><a href="{base}resources/">Resources</a>{external_link(BOOK['repositoryUrl'] + '/issues', 'Suggest a correction')}</nav>
+  <nav class="footer-links" aria-label="Footer navigation"><a href="{base}#chapters">Chapters</a><a href="{base}resources/">Resources</a>{external_link(BOOK['repositoryUrl'] + '/issues', 'Suggest a correction')}{settings}</nav>
 </footer>'''
 
 
-def page(title, description, content, path="", depth=0, active=""):
+def page(title, description, content, path="", depth=0, active="", content_group="Home"):
     base = "../" * depth or "./"
     full_title = BOOK["title"] if not title else f"{title} — {BOOK['title']}"
     canonical = BOOK["siteUrl"].rstrip("/") + "/" + path
     analytics = ""
     if BOOK.get("goatCounterEndpoint"):
         analytics = f'\n  <script data-goatcounter="{e(BOOK["goatCounterEndpoint"])}" async src="https://gc.zgo.at/count.js"></script>'
+    measurement_id = BOOK.get("googleAnalyticsMeasurementId")
+    if measurement_id:
+        analytics += f'''
+  <section id="analytics-consent" aria-label="Analytics preferences" hidden>
+    <p>Allow Google Analytics cookies to help us see which countries readers visit from and which book resources they open? <a href="https://policies.google.com/technologies/partner-sites">How Google uses this data</a></p>
+    <button type="button" data-choice="denied">Decline</button>
+    <button type="button" data-choice="granted">Allow analytics</button>
+  </section>
+  <script defer src="{base}assets/google-analytics.js" data-measurement-id="{e(measurement_id)}" data-content-group="{e(content_group)}"></script>'''
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -206,7 +219,8 @@ def chapter_page(chapter, index):
 <div class="chapter-layout"><aside class="chapter-sidebar" aria-label="Chapter topics"><h2 class="eyebrow">In this chapter</h2><ul class="topic-list">{topics}</ul>{browse_link}</aside><div class="chapter-content">{illustration}{''.join(sections)}</div></div>
 <nav class="chapter-pagination" aria-label="Adjacent chapters">{''.join(pagination)}</nav>
 </main>'''
-    return page(f"Chapter {chapter['number']}: {chapter['title']}", chapter["summary"], content, chapter_path(chapter), 2)
+    return page(f"Chapter {chapter['number']}: {chapter['title']}", chapter["summary"], content,
+                chapter_path(chapter), 2, content_group=f"Chapter {chapter['number']}")
 
 
 def resources_page():
@@ -234,7 +248,7 @@ def resources_page():
 <div class="resource-catalogue" id="resource-results">{''.join(rows)}<p class="empty-state" data-empty-state hidden>No resources match these filters. Try another term or select all chapters.</p></div>
 </section><p class="resource-note">Resources relevant to several chapters appear in each chapter’s list.</p>
 </main>'''
-    return page("Resources", "Code repositories, reproducible experiments, and related papers for every chapter of Bayesian Adversarial Machine Learning.", content, "resources/", 1, "resources")
+    return page("Resources", "Code repositories, reproducible experiments, and related papers for every chapter of Bayesian Adversarial Machine Learning.", content, "resources/", 1, "resources", content_group="Resources")
 
 
 def validate():
@@ -254,6 +268,8 @@ def validate():
                 checked_url(resource.get("url", ""))
     checked_url(BOOK["siteUrl"])
     checked_url(BOOK["repositoryUrl"])
+    if BOOK.get("googleAnalyticsMeasurementId") and not re.fullmatch(r"G-[A-Z0-9]+", BOOK["googleAnalyticsMeasurementId"]):
+        raise ValueError("Expected a GA4 web stream measurement ID beginning with G-")
     if BOOK.get("goatCounterEndpoint"):
         endpoint = urlsplit(BOOK["goatCounterEndpoint"])
         if (endpoint.scheme != "https" or not endpoint.netloc.endswith(".goatcounter.com")
@@ -278,7 +294,7 @@ def build():
     write("resources/index.html", resources_page())
     not_found = f'<main id="main" class="container not-found"><p class="eyebrow">404</p><h1>Page not found</h1><p>This page may have moved or the link may be incorrect.</p><a class="button" href="{e(BOOK["siteUrl"])}#chapters">Chapters <span aria-hidden="true">↗</span></a></main>'
     # GitHub serves this document at arbitrary paths, so its assets and navigation use absolute URLs.
-    error = page("Page not found", "Return to the book’s chapters and supporting resources.", not_found, "404.html")
+    error = page("Page not found", "Return to the book’s chapters and supporting resources.", not_found, "404.html", content_group="404")
     error = error.replace('href="./', f'href="{e(BOOK["siteUrl"].rstrip("/"))}/').replace('src="./', f'src="{e(BOOK["siteUrl"].rstrip("/"))}/')
     write("404.html", error)
     urls = [BOOK["siteUrl"].rstrip("/") + "/" + path for path in ["", "resources/"] + [chapter_path(chapter) for chapter in CHAPTERS]]
