@@ -1,49 +1,87 @@
 <!doctype html>
-<html lang="es">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://roinaveiro.goatcounter.com; base-uri 'none'; form-action 'none'; object-src 'none'">
-  <title>Mapa de lectores · Bayesian Adversarial Machine Learning</title>
-  <link rel="icon" href="../assets/favicon.svg">
-  <link rel="stylesheet" href="./mapa.css">
-  <script defer src="./mapa.js"></script>
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoatCounter Dashboard: a fast, private analytics dashboard</title>
+<meta name="description" content="A fast, private dashboard for GoatCounter analytics. Open source, no server, no build step, no tracking. Try the demo, no key needed.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abhishekhsingh.github.io/goatcounter-dashboard/">
+<meta property="og:title" content="GoatCounter Dashboard">
+<meta property="og:description" content="A fast, private dashboard for GoatCounter analytics. No server, no build step, no tracking. Open source, MIT.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhishekhsingh.github.io/goatcounter-dashboard/">
+<meta property="og:site_name" content="GoatCounter Dashboard">
+<meta property="og:image" content="https://abhishekhsingh.github.io/goatcounter-dashboard/assets/seo/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GoatCounter Dashboard showing a visitors chart in the Nova dark design">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GoatCounter Dashboard">
+<meta name="twitter:description" content="A fast, private dashboard for GoatCounter analytics. No server, no build step, no tracking.">
+<meta name="twitter:image" content="https://abhishekhsingh.github.io/goatcounter-dashboard/assets/seo/og-card.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GoatCounter Dashboard","description":"A fast, private dashboard for GoatCounter web analytics. Runs entirely in the browser with no server, no build step and no tracking.","url":"https://abhishekhsingh.github.io/goatcounter-dashboard/","applicationCategory":"DeveloperApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","codeRepository":"https://github.com/abhishekhsingh/goatcounter-dashboard","author":{"@type":"Person","name":"Abhishekh Singh","url":"https://abhishekhsingh.github.io/"}}
+</script>
+<meta name="theme-color" content="#06050f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.88em' font-size='88'%3E%F0%9F%90%90%3C/text%3E%3C/svg%3E">
+<script>
+// A new visit opens in Nova dark. A choice lasts for the tab (sessionStorage) and is kept for later visits only
+// if the visitor turns on "Remember my choice" (localStorage). Applied before first paint so there is no flash.
+(function () {
+  var t = 'dark', look = 'nova', pref = {};
+  try { pref = JSON.parse(sessionStorage.getItem('gc-dashboard-session') || localStorage.getItem('gc-dashboard-pref') || '{}') || {}; } catch (e) {}
+  if (pref.t === 'light') t = 'light';
+  if (pref.l === 'classic') look = 'classic';
+  var bg = pref.b === 'still' || pref.b === 'off' ? pref.b : 'flow';
+  var d = document.documentElement;
+  d.setAttribute('data-theme', t);
+  d.setAttribute('data-look', look);
+  d.setAttribute('data-bg', bg);
+  window.gcPref = {
+    now: function () { return JSON.stringify({ l: d.getAttribute('data-look'), t: d.getAttribute('data-theme'), b: d.getAttribute('data-bg') }); },
+    save: function () { try { var v = this.now(); sessionStorage.setItem('gc-dashboard-session', v); if (localStorage.getItem('gc-dashboard-pref')) localStorage.setItem('gc-dashboard-pref', v); } catch (e) {} },
+    pinned: function () { try { return !!localStorage.getItem('gc-dashboard-pref'); } catch (e) { return false; } },
+    pin: function (on) { try { if (on) localStorage.setItem('gc-dashboard-pref', this.now()); else localStorage.removeItem('gc-dashboard-pref'); } catch (e) {} }
+  };
+  document.write('<link rel="stylesheet" href="css/app.css">');
+  document.write('<link rel="stylesheet" href="css/' + look + '.css" id="look-css-' + look + '">');
+})();
+</script>
+<script type="importmap">
+{ "imports": { "preact": "./vendor/preact.js", "preact/hooks": "./vendor/hooks.js", "htm": "./vendor/htm.js", "cobe": "./vendor/cobe.js", "phenomenon": "./vendor/phenomenon.js" } }
+</script>
+<link rel="modulepreload" href="js/main.js">
+<link rel="modulepreload" href="js/ui.js">
+<link rel="modulepreload" href="js/components/app.js">
+<link rel="modulepreload" href="js/components/common.js">
+<link rel="modulepreload" href="js/components/hero.js">
+<link rel="modulepreload" href="js/components/cards.js">
+<link rel="modulepreload" href="js/components/connect.js">
+<link rel="modulepreload" href="js/components/year.js">
+<link rel="modulepreload" href="js/components/sankey.js">
+<link rel="modulepreload" href="js/components/palette.js">
+<link rel="modulepreload" href="js/components/rail.js">
+<link rel="modulepreload" href="js/components/recap.js">
+<link rel="modulepreload" href="js/fx.js">
+<link rel="modulepreload" href="js/countries.js">
+<link rel="modulepreload" href="js/components/breakdown.js">
+<link rel="modulepreload" href="js/components/skyline.js">
+<link rel="modulepreload" href="js/components/ridgeline.js">
+<link rel="modulepreload" href="js/api.js">
+<link rel="modulepreload" href="js/cache.js">
+<link rel="modulepreload" href="js/util.js">
+<link rel="modulepreload" href="js/model.js">
+<link rel="modulepreload" href="vendor/preact.js">
+<link rel="modulepreload" href="vendor/hooks.js">
+<link rel="modulepreload" href="vendor/htm.js">
 </head>
 <body>
-  <header><span lang="en">Bayesian Adversarial Machine Learning</span><a href="https://roinaveiro.goatcounter.com/" target="_blank" rel="noreferrer">GoatCounter ↗</a></header>
-  <main>
-    <h1>Mapa de lectores</h1>
-    <section id="access" aria-labelledby="access-title">
-      <h2 id="access-title">Conectar con GoatCounter</h2>
-      <p>Usa una clave con permiso de lectura de estadísticas. Solo se utiliza en esta pestaña.</p>
-      <form id="login">
-        <label for="key">Clave de API</label>
-        <div class="input-line"><input id="key" type="password" autocomplete="off" spellcheck="false" required><button>Conectar</button></div>
-      </form>
-      <a href="https://roinaveiro.goatcounter.com/user/api" target="_blank" rel="noreferrer">Crear una clave en GoatCounter ↗</a>
-    </section>
-    <noscript>Activa JavaScript para consultar el mapa.</noscript>
-    <section id="dashboard" hidden aria-label="Estadísticas de ubicación">
-      <div class="controls">
-        <div role="group" aria-label="Vista del mapa" class="switch"><button id="world" aria-pressed="true">Mundo</button><button id="states" aria-pressed="false">Estados Unidos</button></div>
-        <label>Período <select id="period"><option value="1">Hoy</option><option value="7">Últimos 7 días</option><option value="30">Últimos 30 días</option><option value="custom">Elegir fechas</option></select></label>
-        <button id="refresh">Actualizar</button>
-        <button id="disconnect">Desconectar</button>
-      </div>
-      <form id="dates" hidden><label>Desde <input type="date" id="start" required></label><label>Hasta <input type="date" id="end" required></label><button>Aplicar</button></form>
-      <div class="charts">
-        <figure>
-          <figcaption id="map-title">Visitantes por país</figcaption>
-          <svg id="map" viewBox="0 0 960 500" role="img" aria-labelledby="map-title"></svg>
-          <div class="legend" aria-label="Escala del mapa"><span><i class="c0"></i>Sin registro</span><span><i class="c1"></i>1</span><span><i class="c2"></i>2–4</span><span><i class="c3"></i>5–9</span><span><i class="c4"></i>10–49</span><span><i class="c5"></i>50+</span></div>
-        </figure>
-        <div class="listing"><table><thead><tr><th id="location" scope="col">País</th><th scope="col">Visitantes</th></tr></thead><tbody id="rows"></tbody></table></div>
-      </div>
-    </section>
-    <p id="status" role="status" aria-live="polite"></p>
-    <footer>Cartografía de <a href="https://www.naturalearthdata.com/">Natural Earth</a> y del <a href="https://github.com/topojson/us-atlas">US Census Bureau vía US Atlas</a>.</footer>
-  </main>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="boot" class="connect" aria-hidden="true"><div class="card"><div class="mark">🐐</div><h1>GoatCounter <span class="ital">Dashboard</span></h1><p>Loading your traffic.</p></div></div>
+<div id="app"><noscript><h1>GoatCounter Dashboard</h1><p>A fast, private dashboard for <a href="https://www.goatcounter.com/">GoatCounter</a> web analytics. It runs entirely in your browser, with no server, no build step and no tracking. This page needs JavaScript to run.</p><p>Visitors over time, top pages and referrers, a globe with country drill-down, a weekday-by-hour skyline, a yearly calendar, and a command palette. Press Try demo to explore a sample site without an account.</p><p><a href="https://github.com/abhishekhsingh/goatcounter-dashboard">Source code on GitHub</a>, MIT licensed.</p></noscript></div>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
