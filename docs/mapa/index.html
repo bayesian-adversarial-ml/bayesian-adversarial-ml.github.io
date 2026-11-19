@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://roinaveiro.goatcounter.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Mapa de lectores · Bayesian Adversarial Machine Learning</title>
+  <link rel="icon" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="./mapa.css">
+  <script defer src="./mapa.js"></script>
+</head>
+<body>
+  <header><span lang="en">Bayesian Adversarial Machine Learning</span><a href="https://roinaveiro.goatcounter.com/" target="_blank" rel="noreferrer">GoatCounter ↗</a></header>
+  <main>
+    <h1>Mapa de lectores</h1>
+    <section id="access" aria-labelledby="access-title">
+      <h2 id="access-title">Conectar con GoatCounter</h2>
+      <p>Usa una clave con permiso de lectura de estadísticas. Solo se utiliza en esta pestaña.</p>
+      <form id="login">
+        <label for="key">Clave de API</label>
+        <div class="input-line"><input id="key" type="password" autocomplete="off" spellcheck="false" required><button>Conectar</button></div>
+      </form>
+      <a href="https://roinaveiro.goatcounter.com/user/api" target="_blank" rel="noreferrer">Crear una clave en GoatCounter ↗</a>
+    </section>
+    <noscript>Activa JavaScript para consultar el mapa.</noscript>
+    <section id="dashboard" hidden aria-label="Estadísticas de ubicación">
+      <div class="controls">
+        <div role="group" aria-label="Vista del mapa" class="switch"><button id="world" aria-pressed="true">Mundo</button><button id="states" aria-pressed="false">Estados Unidos</button></div>
+        <label>Período <select id="period"><option value="1">Hoy</option><option value="7">Últimos 7 días</option><option value="30">Últimos 30 días</option><option value="custom">Elegir fechas</option></select></label>
+        <button id="refresh">Actualizar</button>
+        <button id="disconnect">Desconectar</button>
+      </div>
+      <form id="dates" hidden><label>Desde <input type="date" id="start" required></label><label>Hasta <input type="date" id="end" required></label><button>Aplicar</button></form>
+      <div class="charts">
+        <figure>
+          <figcaption id="map-title">Visitantes por país</figcaption>
+          <svg id="map" viewBox="0 0 960 500" role="img" aria-labelledby="map-title"></svg>
+          <div class="legend" aria-label="Escala del mapa"><span><i class="c0"></i>Sin registro</span><span><i class="c1"></i>1</span><span><i class="c2"></i>2–4</span><span><i class="c3"></i>5–9</span><span><i class="c4"></i>10–49</span><span><i class="c5"></i>50+</span></div>
+        </figure>
+        <div class="listing"><table><thead><tr><th id="location" scope="col">País</th><th scope="col">Visitantes</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </div>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <footer>Cartografía de <a href="https://www.naturalearthdata.com/">Natural Earth</a> y del <a href="https://github.com/topojson/us-atlas">US Census Bureau vía US Atlas</a>.</footer>
+  </main>
+</body>
+</html>

@@ -22,9 +22,11 @@ Set `book.googleAnalyticsMeasurementId` in `data/catalog.json` to the public `G-
 
 Each chapter page sets the built-in **Content group** to `Chapter N`. On both the chapter page and the resource catalogue, opening a listed resource sends a `resource_click` event with the resource’s chapter and destination URL. The GA4 **Page path** identifies where the click happened. When Enhanced measurement is enabled, GA4 can also record a generic outbound `click`. Filter to `resource_click` when counting book resources.
 
-For the reader map, connect the GA4 property to [Google Data Studio](https://docs.cloud.google.com/data-studio/connect-to-google-analytics). Add a **Geo chart** with **Country**, **Views** and the **World** zoom area. Add a **Date range control** and a **Content group** dropdown. For resource clicks, add a table with **Content group**, **Link URL** and **Event count**, filtered to **Event name = resource_click**. A reader who declines analytics is excluded from these Google reports.
+For an optional Google report, connect the GA4 property to [Google Data Studio](https://docs.cloud.google.com/data-studio/connect-to-google-analytics). Add a **Geo chart** with **Country**, **Views** and the **World** zoom area. Add a **Date range control** and a **Content group** dropdown. For resource clicks, add a table with **Content group**, **Link URL** and **Event count**, filtered to **Event name = resource_click**. A reader who declines analytics is excluded from these Google reports.
 
 ### GoatCounter
+
+The [reader map](https://bayesian-adversarial-ml.github.io/mapa/) shows visitor counts by country and US state for a selected period. Create a token with only the statistics permission in [GoatCounter’s API settings](https://roinaveiro.goatcounter.com/user/api), then enter it in the map. The browser sends it directly to the GoatCounter API and keeps it in memory until the tab closes or reloads. The map contains no tracking scripts. Its outlines come from Natural Earth (1:110m) and US Atlas (Census cartographic boundaries).
 
 [GoatCounter](https://roinaveiro.goatcounter.com/) records page visits and clicks on chapter resources, with location and referral statistics. Sign in to that dashboard to view the reports. The public collection endpoint is configured by `book.goatCounterEndpoint` in `data/catalog.json`; it is not an API key or password.
 

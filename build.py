@@ -288,6 +288,7 @@ def build():
     validate()
     OUTPUT.mkdir(exist_ok=True)
     shutil.copytree(ROOT / "assets", OUTPUT / "assets", dirs_exist_ok=True)
+    shutil.copytree(ROOT / "mapa", OUTPUT / "mapa", dirs_exist_ok=True)
     write("index.html", home())
     for index, chapter in enumerate(CHAPTERS):
         write(chapter_path(chapter) + "index.html", chapter_page(chapter, index))
