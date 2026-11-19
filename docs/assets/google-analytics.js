@@ -25,7 +25,9 @@
     if (!allowed) {
       if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
       for (const name of ['_ga', '_ga_' + measurementId.slice(2)]) {
-        document.cookie = name + '=; Max-Age=0; Path=/; SameSite=Lax; Secure';
+        const expired = name + '=; Max-Age=0; Path=/; SameSite=Lax; Secure';
+        document.cookie = expired;
+        document.cookie = expired + '; Domain=' + location.hostname;
       }
       return;
     }
